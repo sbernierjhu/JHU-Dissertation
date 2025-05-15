@@ -10,7 +10,7 @@
 
 \end{singlespace} 
 \section{X-ray diffraction}
-\subsection{Diffraction basics}
+\subsection{Diffraction basics: Wave interference and Bragg's Law}
 \begin{figure}[htbp]
   \centering
   \includesvg[width = 200pt]{Basic wave.svg}
@@ -31,7 +31,7 @@ where t is time, $\vec{x}$ is a vector representing position, and A, $\omega$, $
 \end{figure}
 Diffraction is possible with all types and frequencies of waves, although waves will only diffract when they are incident on an object which enforces the necessary conditions for diffraction. One such object is a diffraction grating, which has slits (at least as wide as the wavelength) spaced to restrict light waves to follow a certain set of paths $\vec{x}$. For a given wavelength $\lambda$ for two waves traveling on the same path, a phase difference $\Delta\varphi$ can be produced when the two waves travel different distances, and this can enable diffraction.
 
-In the case of x-ray diffraction, or XRD, the waves in question have a frequency between $3\times10^{16}$ Hz to $3\times10^{19}$ Hz (about 10 nm to 10 pm), termed "x-rays". This wavelength range corresponds to the spacing of atoms in a crystal. Thus, photons incident on a lattice with spacing $d\approx\lambda$ will experience constructive interference between photons which travel an odd number of planes deep and deconstructive interference between photons which travel an even number of planes deep. In a back reflection setup \ref{BackRef} where the x-ray detector is on the same side of the sample as the x-ray source, constructive interference of light incident on a 1D plane of atoms with lattice spacing d is subject to equation \ref{Bragg'sLaw} (Bragg’s law defined normal to the plane). If n is not an integer, x-rays will deconstructively interfere and be destroyed before they can reach the detector.
+In the case of x-ray diffraction, or XRD, the waves in question have a frequency between $3\times10^{16}$ Hz to $3\times10^{19}$ Hz (about 10 nm to 10 pm), termed "x-rays". This wavelength range corresponds to the spacing of atoms in a crystal. Thus, photons incident on a lattice with spacing $d\approx\lambda$ will experience constructive interference between photons which travel an odd number of planes deep and deconstructive interference between photons which travel an even number of planes deep. In a back reflection setup, Figure \ref{BackRef}, where the x-ray detector is on the same side of the sample as the x-ray source, constructive interference of light incident on a 1D plane of atoms with lattice spacing d is subject to equation \ref{Bragg'sLaw} (Bragg’s Law defined normal to the plane). If n is not an integer, x-rays will deconstructively interfere and be destroyed before they can reach the detector.
 \begin{equation}
     2d\cos{\theta} = n\lambda
     \label{Bragg'sLaw}
@@ -44,8 +44,7 @@ In the case of x-ray diffraction, or XRD, the waves in question have a frequency
   \label{BackRef}
 \end{figure}
 
-Equation \ref{latticeplanespacinggeneral} defines the lattice plane spacing d in terms of the plane number h k l and lattice constants a, b, c, $\alpha, \beta, \gamma$ for a triclinic crystal. Equation \ref{latticeplanespacinggeneral} reduces for higher symmetry space groups, all the way to the very simple equation \ref{latticeplanespacingcubic} for a cubic crystal or Equation \ref{latticeplanespacinghexagonal} for a hexagonal crystal.
-
+Equation \ref{latticeplanespacinggeneral} defines the lattice plane spacing d in terms of the plane number h k l and lattice constants a, b, c, $\alpha, \beta, \gamma$ for a triclinic crystal. Equation \ref{latticeplanespacinggeneral} reduces for higher symmetry space groups, all the way to the very simple equation \ref{latticeplanespacingcubic} for a cubic crystal or \ref{latticeplanespacinghexagonal} for a hexagonal crystal.
 \begin{multline}
     \frac{1}{d^2}=\frac{h^2b^2c^2\sin^2{\alpha}+k^2a^2c^2\sin^2{\beta}+l^2a^2b^2\sin^2{\gamma}}{a^2b^2c^2(1-\cos^2{\alpha}-\cos^2{\beta}-\cos^2{\gamma}+2\cos{\alpha}\cos{\beta}\cos{\gamma})}\\\times[2hkabc^2(\cos{\alpha}\cos{\beta}-\cos{\gamma})+2kla^2bc(\cos{\beta}\cos{\gamma}-\cos{\alpha})\\+2hlab^2c(\cos{\alpha}\cos{\gamma}-\cos{\beta})]
     \label{latticeplanespacinggeneral}
@@ -63,82 +62,153 @@ The smallest possible d spacing which can be resolved corresponds to the smalles
     d_{min}=\frac{\lambda_{min}}{2}
     \label{minspacing}
 \end{equation}
-There can also be interference between photons of different $\lambda$, which is why some diffraction techniques use filters and specific detector voltages to reduce the number of possible $\lambda$s. The existence of a minimum (and maximum) in both the incident light and in what will diffract is why interference is limited and diffraction does not simply cancel all light coming in.
-\subsection{X-ray sources and detectors}
-\subsubsection{The x-ray source}
-X-rays are produced in an x-ray lamp by using high voltages to accelerate electrons onto an anode FIGURE, producing x-rays and heat. X-rays are produced at a broad range of wavelengths (called bremsstrahlung radiation) as well as a few specific wavelengths characteristic of the specific electronic transitions in the anode material.
+There can also be interference between photons of different $\lambda$, which is why some diffraction techniques use filters and specific detector voltages to reduce the number of possible $\lambda$s. The existence of a minimum (and maximum) in both the incident light and in what will diffract is why interference is limited and deconstructive interference does not simply cancel all light coming in.
+
+\subsection{Mechanism of diffraction in solids}
+\subsubsection{Types of scattering and the structure factor}
 \begin{figure}[htbp]
   \centering
-  \includesvg[width = 400pt]{unfiltered tungsten radiation.svg}
-  \caption{Tungsten x-ray lamp radiation fluence at different biases (SMB-made with intensity data from: https://oar.ptb.de/resources/show/10.7795/720.20201118 and line positions from: https://xdb.lbl.gov/Section1/Table_1-2.pdf}
-  \label{Wradiation}
+  \includesvg[width = 300pt]{Scattering types.svg}
+  \caption{Types of photon scattering}
+  \label{ScatteringTypes}
 \end{figure}
-Figure \ref{Wradiation} shows the measured intensity vs. wavelength for an unfiltered tungsten anode when different biases are applied. The specific material of the anode determines the position of the intense characteristic peaks. Different filters may be used to reduce certain of the characteristic peaks; for example, a nickel filter absorbs the Cu $K_\beta$ characteristic wavelengths while allowing $K_\alpha$ through. Note that the 300 $\mu$m beryllium windows used on typical x-ray lamps will also uniformly cut intensity across all wavelengths. Equation \ref{lambdamin} shows the minimum possible wavelength $\lambda$ accessible with a given anode bias $V_{bias}$ (h = Planck’s constant, c = speed of light, e = electron charge). 
+The intensities of x-rays coming from individual planes are mostly determined by equation \ref{planarintensity} for Thomson scattering (Figure \ref{ScatteringTypes}) off an electron, in which an x-ray colliding with an electron excites it into higher oscillatory motion, and then the electron emits an x-ray to relax to a lower energy state. Although there is a phase change (which ends up not mattering for most situations) there is otherwise no difference between the incoming and outgoing photons. This is possible when the energy of the x-ray photon $h\nu_{photon}\ll m_{atom}c^2$. The total intensity of scattered light is described as follows:
 \begin{equation}
-    \lambda_{min} = \frac{hc}{eV_{bias} }
-    \label{lambdamin}
-\end{equation}
-
-\subsubsection{X-ray detectors}
-X-ray detectors come in two generic varieties: zero- and higher-dimensional. A zero-dimensional detector collects only a measure of total photons incident on the detector, while a two-dimensional detector collects both intensity and position information.
-
-An example of a zero-dimensional detector is a scintillation counter, which is made of a material which luminesces in response to ionizing radiation, a photodetector, and a device which converts photons to electrical current. This method is sufficient for powder x-ray diffraction, where the whole of the sample is irradiated and no position-specific information is required. One-dimensional detectors may also be used in powder diffraction when the intensities at various positions on the detector are integrated; this has the added benefit of higher counts per second, although at the cost of resolution.
-
-Two-dimensional detectors become useful when a map of intensity as a function of position is required, such as in single crystal diffraction techniques. An example of a 2D detector used for Laue diffraction, a crystal analysis technique, is a multi-wire proportional counter. Such a device consists of a screen, behind which is a chamber filled with an Ar gas mixture and wire mesh. X-rays ionize Ar atoms, which are then drawn to the wire mesh held at a negative voltage. The addition of 10\% CO\textsubscript{2} in the mixture limits chain reactions where one x-ray leads to several ions.
-
-ANGLE VS. ENERGY DISPERSIVE DIFFRACTION (PWD VS LAUE)
-\subsection{Laue diffraction}
-\subsubsection{Information extracted from a Laue measurement}
-\begin{singlespace}
-During regular use:
-\begin{itemize}
-    \item A measure of crystallinity and disorder from number, symmetry, and shape of spots
-    \item Info on domains and twinning from spot symmetry
-    \item Precise crystal orientation from spot locations and intensities. Non-crystalline samples may show orientation preference.
-    \item The Laue class and crystal type from primarily spot symmetry 
-    \item Crystallochemical info, \textit{i.e.} a rough check if you have the correct sample, from the Laue class and spot spacing
-\end{itemize}
-\end{singlespace}
-During specialized use:
-\begin{itemize}
-    \item A rough approximation of lattice parameters if tube voltage (\textit{i.e.} minimum $\lambda$) and sample-film distance are known
-    \item A measure of beam divergence by following careful analysis of spot shapes on a very highly-crystalline sample 
-    \item Thermal fluctuation information from diffuse scattering, if present. Typically a measurement looking for this specifically would use filters to reduce all but characteristic tube radiation (and probably a non-W source) and vary the temperature.
-    \item Time-resolved crystallography using a very specialized setup (not doable by us, but at a synchrotron) as in https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6501890/ 
-\end{itemize}
-In Laue diffraction, we use white radiation (aka polychromatic, or many wavelengths), so we don’t use filters like a nickel filter to remove the background.\footnote{Note that the lack of a filter increases the danger to human tissue, which does interact with low-energy x-rays (unlike crystals).} Instead, we work below 50 kV bias, where the very intense K peaks for tungsten ($\lambda~0.2 $ \AA) will not be seen. At the normal operating condition of 10 kV, the radiation is entirely broad bremsstrahlung background – this is good for Laue diffraction. The most important part of the spectrum is the part around 1 \AA – on par with the size of the spacing between atoms that we would like to characterize - which is optimized between 10 and 15 kV.
-Note that if you are using high enough voltages to excite the characteristic emissions of the tungsten anode, you will see strangely intense spots from these characteristic x-rays! These are called “Bragg” spots, while the rest are “Laue” spots. The larger the unit cell, the more likely you are to see Bragg spots [when you have sufficient tube voltage].
-It is possible to use characteristic intensities to study the diffuse scattering of a crystal. This diffuse scattering increases with temperature because it is due to thermal motion. It also has the interesting property of remaining in the same place no matter how you rotate your crystal.
-Laue diffraction comes in two geometries: transmission and back-reflection. We use back-reflection. The relatively low intensity of x-rays here would limit the sample thickness if we were using transmission because, in order to reach the detector, an x-ray would have to pass all the way through the sample. In back-reflection, this is less of a concern, although highly absorbing samples will produce fainter patterns.
-\subsubsection{Spot intensities}
-In Laue diffraction, a stationary crystal is bombarded with many wavelengths. This is in contrast with powder or single crystal diffraction, wherein a rotating crystal or powder is bombarded with one or two wavelengths. Since d and θ are fixed, all planes that make the same angle θ with the source will be superimposed on one Laue “spot” FIGURE
-You can think of each plane as “choosing” the right λ for its diffraction condition out of the many available. The intensity of a Laue spot is the sum of all the diffracting x-rays with the same scattering angle θ that reach the detector.
-This means that nominally “forbidden” reflections may still produce spots.
-It also means that lower index numbers will have the most intense spots, because the lower the index number, the more symmetrically equivalent planes there are to reflect x-rays.
-{110} = (110) + (220) + (330) + (440) +…
-\subsubsubsection{Thomson scattering}
-The intensities of x-rays coming from individual planes are mostly determined by equation \ref{planarintensity} for Thomson scattering FIGURE off an electron, in which an x-ray colliding with an electron excites it (into higher oscillatory motion), and then the electron emits an x-ray to relax to a lower energy state. There’s a phase change (which ends up not mattering for most situations) but otherwise no difference between the incoming and outgoing electrons. 
-\begin{equation}
-    I_{scat}(\theta,\lambda)=I_{beam}(\lambda)\frac{e^4}{m^4c^4R^2}(\frac{1+\cos^2{2\theta}}{2})\times|F_{hkl}|^2
+    I_{scat}(\theta,\lambda)=I_{beam}(\lambda)\frac{e^4}{{m_e}^4c^4R^2}(\frac{1+\cos^2{2\theta}}{2})\times|F_{hkl}|^2
     \label{planarintensity}
 \end{equation}
 \begin{equation}
     F_{hkl}= \sum_{j}^{\text{atoms in unit cell}} f_je^{2\pi i(hx_j+ky_j+lz_j)}
     \label{Fhkl}
 \end{equation}
-Here, R is the distance from the electron to the place where you measure intensity I, m is the electron mass, and e is the electron charge. Fhkl is the structure factor, depending on the position xj yj zj of atom j and its atomic scattering form factor fj. Tabulated fj roughly describe the efficiency of an element’s x-ray scattering, similar to an absorption factor.\footnote{fj decreases as sinθ/λ increases, so back-scattering has worse contrast than transmission Laue.} Fhkl can be computed from cifs. Equation \ref{planarintensity} does not include corrections for beam divergence, absorption, nor geometrical considerations but is proportional to the complete result.\footnote{See Preuss et. al. for an easy to follow discussion of these corrections.}
-When Fhkl is 0, the reflection is “forbidden”. This doesn’t mean the spot won’t show up in Laue, however. If, for example, the (120) reflection is forbidden, you might still get a spot from  Σ(240) + (480) + …. Although (120) doesn’t show up, there is a spot at its location. More on this in a later section.
-X-rays primarily interact with the cloud of electrons surrounding an atom, which explains why atomic radius is more measurable in x-ray diffraction than nucleus size. Thomson scattering increases with atomic number because there are more electrons.
-\subsubsubsection{Compton scattering}
-An additional mechanism, called Compton scattering FIGURE, occurs when an incoming x-ray acts like a particle and physically displaces an electron, like two balls colliding. This only really happens when the electron being smacked around isn’t held tightly by its parent atom. The photon goes off at a new angle and has lost some energy during this elastic collision. It’s also picked up some phase that has nothing to do with its original phase. This random phase means it won’t diffract according to the known conditions, but it will increase the background.\footnote{Compton scattering is inelastic, and ∆λ∝1-cos⁡2θ so in back-scattering where 45°≤θ≤90° Compton scattering is worse than in transmission Laue.}
+Here, R is the distance from the electron to the place where intensity I is measured, m is the electron mass, and e is the electron charge. $F_{hkl}$ is the structure factor, depending on the position $(x_j, y_j, z_j)$ of atom j and its atomic scattering form factor $f_j$. Tabulated $f_j$ roughly describe the efficiency of an element’s x-ray scattering, similar to an absorption factor.\footnote{fj decreases as $\sin\theta/\lambda$ increases, so back-scattering techniques have worse contrast than transmission techniques.} Equation \ref{planarintensity} does not include corrections for beam divergence, absorption, nor geometrical considerations but is proportional to the complete result.\footnote{See Preuss et. al. for an easy to follow discussion of these corrections.}
 
-The looser held the electrons, the more Compton scattering you get – in practice this means Compton scattering decreases with increasing atomic number. Lower atomic number elements produce lots of background. As a result, organics are not great for Laue.
-\subsubsubsection{Crystal perfection}
-Counter-intuitively, absolutely perfect crystals produce weak patterns. The reason for this is that a phenomenon called primary extinction reduces the intensity of the incident beam as it travels through the crystal, so deeper planes receive fewer x-rays. Primary extinction is caused by scattering in one plane – e.g. (200) – redirecting an x-ray antiparallel to its original trajectory with a 90° phase shift. When this x-ray interacts with a higher plane – e.g. (100) – it scatters and gets another 90° phase. The final beam is now parallel to the initial with the exact 180° phase difference needed for deconstructive interference Fig 31.
+When $F_{hkl}$ is 0, the reflection is “forbidden”. There are many situations in which a nominally forbidden reflection may still be observed in an x-ray diffraction technique, however. !!!If, for example, the (120) reflection is forbidden, you might still get a spot from  $\Sigma$(240) + (480) + …. Although (120) doesn’t show up, there is a spot at its location. FIGURE
+
+Since x-rays interact with the cloud of electrons surrounding an atom, Thomson scattering increases with atomic number because there are more electrons. An additional mechanism called Compton scattering occurs when an incoming x-ray acts like a particle and physically displaces an electron, like two balls colliding. Thomson scattering is a special case of this more general phenomenon. Compton scattering only occurs when the electron being smacked around isn’t held tightly by its parent atom. The incident photon is scattered to a new angle and has lost some energy during this inelastic collision. It has also picked up some phase that has nothing to do with its original phase. This random phase means it will no longer diffract according to the known conditions, but it will increase the background of a diffraction measurement.\footnote{$\Delta\lambda\propto 1-\cos{2\theta}$ so Compton scattering is worse in back-scattering, where \ang{45}$\leq\theta\leq$\ang{90}, compared to transmission techniques.} The looser held the electrons, the more Compton scattering – in practice this means Compton scattering (and the background of a diffraction measurement) decreases with increasing atomic number.
+
+\subsubsection{The reciprocal lattice}
+The atoms in a crystal cause scattering of incident x-ray photons, but it is their \textit{spacing} which dictates the diffraction pattern imaged in experimental techniques. In other words, the lattice described by a diffraction pattern is not the real-space [direct] lattice. The imaged lattice is known as the reciprocal lattice: the set of all vectors that are wavevectors of plane waves in the Fourier series of a spatial function with the same periodicity as the real lattice of atoms in a crystal. It has the notable feature of sharing the symmetry of its parent lattice, which in turn means that a diffraction pattern's symmetry reflects that of the real crystal.
+
+\begin{figure}[htbp]
+  \centering
+  \includesvg[width = 350pt]{Reciprocal lattice.svg}
+  \caption{Left: Real lattice, Right: Reciprocal lattice}
+  \label{RecipLatt}
+\end{figure}
+
+To better understand this concept of a reciprocal lattice, note that plane waves can be written as functions of wavenumber k and position x (see equation \ref{PhotonFreqSinusoidal} for the precise form). The real lattice exists in Euclidean space (the real world), where length is measured by x, Figure \ref{RecipLatt}. The reciprocal lattice exists in k-space (also known as momentum space), where length is measured by momentum k. A point on the reciprocal lattice corresponds to a plane wave in real space whose phase is $2\pi n$ at every direct lattice point. Recall that this is the necessary condition for constructive interference. Thus the reciprocal lattice has points everywhere incident x-rays should constructively interfere.\footnote{See also https://www.youtube.com/watch?v=DFFU39A3fPY for a visualization}
+
+Just like real crystals are described by unit vectors $\vec{a},\vec{b},\vec{c}$, the reciprocal lattice is described by unit vectors $\vec{a^*},\vec{b^*},\vec{c^*}$, which can be calculated from the unit vectors of the initial real-space lattice. In the below equations, K is a constant relating to the volume of the initial lattice.
+
+\begin{equation}
+    \vec{a^*}=K\frac{\vec{b}\times\vec{c}}{\vec{a}\cdot(\vec{b}\times\vec{c})};\quad
+    \vec{b^*}=K\frac{\vec{c}\times\vec{a}}{\vec{b}\cdot(\vec{c}\times\vec{a})};\quad
+    \vec{c^*}=K\frac{\vec{a}\times\vec{b}}{\vec{c}\cdot(\vec{a}\times\vec{b})}
+    \label{RecipLatVecs}
+\end{equation}
+
+The reciprocal lattice is the set of all reciprocal lattice vectors $\vec{x^*}$. The following relationship holds between the real space lattice vectors $\vec{x}$ and the reciprocal lattice vector $\vec{x^*}$:
+\begin{equation}
+    \vec{x^*}=h\vec{a^*}+k\vec{b^*}+l\vec{c^*}
+    \label{RecipLatVecX}
+\end{equation}
+\begin{equation}
+    \vec{x}=p\vec{a}+q\vec{b}+r\vec{c}
+    \label{RealLatVecX}
+\end{equation}
+\begin{equation}
+    \vec{x}\cdot\vec{x^*}=2\pi n
+    \label{RecipRealLatVecXRelation}
+\end{equation}
+Points in the reciprocal lattice are determined by the location and spacing of planes in the real crystal. Thus each point corresponds to a different plane. The reciprocal lattice is insensitive to individual variations in atom types and positions, but it is sensitive to variations in d-spacing or the angles between planes.
+
+\subsubsection{The Ewald sphere and the Laue condition}
+Of course, the mathematical framework presented above is intuitive in two dimensions, but real materials exist in three. Consider a diffracting x-ray from a single plane of a crystal. In the reciprocal lattice, it interacts with a single reciprocal point. It will be sent in a specific direction out of the crystal determined by the diffraction conditions and the incident direction. If one rotates the crystal, the same incident x-ray will be sent to a new point, but it always interacts with the same reciprocal lattice and remains subject to the same diffraction conditions; namely, that the wavelength of the incoming and outgoing x-rays be the same (elastic scattering) even though their directions vary.
+
+Define the scattering vector $\Delta\vec{s}$ to describe the difference between the incoming and outgoing photon momenta with vectors $\vec{s}$.
+\begin{equation}
+    \vec{s}_{diffracted}-\vec{s}_{incident}=\Delta\vec{s}
+    \label{ScattVec}
+\end{equation}
+Considering the elastic limit (Thomson scattering), frequency remains constant between the incident and outgoing photons. Thus we can also write Equation \ref{FreqInFreqOut1} to relate $f_{in}$ to $f_{out}$. Equation \ref{FreqInFreqOut1} holds true whenever the phase varies by $2\pi n$ because cosine is a periodic function (this same relationship is what gave Bragg’s Law, Equation \ref{Bragg'sLaw}). This gives equation \ref{FreqInFreqOut2}. 
+\begin{equation}
+   \cos{(\omega t-\vec{s}_{in}\cdot\vec{x}+\varphi_{in})}=\cos{(\omega t-\vec{s}_{out}\cdot\vec{x}+\varphi_{out})}
+    \label{FreqInFreqOut1}
+\end{equation}
+\begin{equation}
+    \Rightarrow\omega t-\vec{s}_{in}\cdot\vec{x}+\varphi_{in}=\omega t-\vec{s}_{out}\cdot\vec{x}+\varphi_{out}+2\pi n
+    \label{FreqInFreqOut2}
+\end{equation}
+\begin{equation}
+    \Delta\vec{s}=\vec{x^*}
+    \label{FreqInFreqOut3}
+\end{equation}
+Combining equations \ref{ScattVec} and \ref{FreqInFreqOut1}, one can get equation \ref{FreqInFreqOut3} with some rearranging... and this looks awfully similar to Equation \ref{RecipRealLatVecXRelation} for the relation between reciprocal and real lattice vectors. Thus it is possible to finally derive Equation \ref{LaueCondition} called the Laue condition for diffraction after Max von Laue, one of the fathers of x-ray diffraction techniques, below: 
+\begin{equation}
+    \Rightarrow\Delta\vec{s}\cdot\vec{x}=2\pi n
+    \label{LaueCondition}
+\end{equation}
+The key to the Laue condition (which was developed before Bragg’s law)  is that the lengths of both s vectors are equal to $1/\lambda$ – and $\lambda$ is the wavelength of both the diffracted and incident beams. If $s_{in}$ and $s_{out}$ are drawn with the same origin, their endpoints lie on a circle of radius $1/\lambda$ FIGURE. The difference between these is the third leg of an isosceles triangle between the origin and two points on the edge. Stated equivalently, any reciprocal lattice vector that connects two points on the circle meets the diffraction conditions.
+
+Extending this into the third dimension, we produce what is known as the Ewald sphere (also more intuitively called the "sphere of reflection"): a conceptual sphere of radius $1/\lambda$ passing through the origin of the reciprocal lattice.\footnote{To visualize a single Ewald sphere constructed from monochromatic radiation, see this Java applet: https://www.xtal.iqfr.csic.es/Cristalografia/Applet/Ewald/diffractOgram.jar}
+
+\subsection{X-ray sources and detectors}
+\subsubsection{The x-ray source}
+\begin{figure}[htbp]
+  \centering
+  \includesvg[width = 300pt]{Roentgen-Roehre.svg}
+  \caption{A water-cooled xray tube. A = anode, K = cathode, W = water flow, c = water reservoir, U = voltage. Source: https://commons.wikimedia.org/wiki/File:Roentgen-Roehre.svg}
+  \label{xraysource}
+\end{figure}
+X-rays are produced in an x-ray lamp by using high voltages to accelerate electrons onto an anode (Figure \ref{xraysource}), producing x-rays and heat. X-ray photons are produced at a broad range of wavelengths (called bremsstrahlung radiation) as well as a few specific wavelengths characteristic of the specific electronic transitions in the anode material.
+
+\begin{figure}[htbp]
+  \centering
+  \includesvg[width = 400pt]{unfiltered tungsten radiation.svg}
+  \caption{Tungsten x-ray lamp radiation fluence at different biases (SMB-made with intensity data from: https://oar.ptb.de/resources/show/10.7795/720.20201118 and line positions from: https://xdb.lbl.gov/Section1/Table_1-2.pdf}
+  \label{Wradiation}
+\end{figure}
+Figure \ref{Wradiation} shows the measured intensity vs. wavelength for an unfiltered tungsten anode when different biases are applied. The specific material of the anode determines the position of the intense characteristic peaks. Different filters may be used to reduce certain of the characteristic peaks; for example, a nickel filter absorbs the $K_\beta$ characteristic wavelengths of a copper anode while allowing $K_\alpha$ wavelengths through. Note that the 300 $\mu$m beryllium windows used on typical x-ray lamps will also uniformly cut intensity across all wavelengths. Equation \ref{lambdamin} shows the minimum possible wavelength $\lambda$ accessible with a given anode bias $V_{bias}$ (h = Planck’s constant, c = speed of light, e = electron charge). 
+\begin{equation}
+    \lambda_{min} = \frac{hc}{eV_{bias} }
+    \label{lambdamin}
+\end{equation}
+
+\subsubsection{X-ray detectors}
+X-ray detectors come in two generic varieties: zero- and higher-dimensional. A zero-dimensional detector collects only a measure of total photons incident on the detector, while a higher-dimensional detector collects both intensity and position information.
+\begin{figure}[htbp]
+  \centering
+  \includesvg[width = 400pt]{PhotoMultiplierTubeAndScintillator.svg}
+  \caption{Scintillation counter example. Qwerty123uiop, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons}
+  \label{scintillationcounter}
+\end{figure}
+
+An example of a zero-dimensional detector is a scintillation counter (Figure \ref{scintillationcounter}), which is made of a material which luminesces in response to ionizing radiation, a photodetector, and a device which converts photons to electrical current. This method is sufficient for powder x-ray diffraction, where the whole of the sample is irradiated and no position-specific information is required. One-dimensional detectors may also be used in powder diffraction when the intensities at various positions on the detector are integrated; this has the added benefit of higher counts per second, although at the cost of resolution.
+\begin{figure}[htbp]
+  \centering
+  \includesvg[width = 200pt]{Wire_chamber_schematic.svg}
+  \caption{zwire chamber. Qwerty123uiop, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons}
+  \label{wirechamber}
+\end{figure}
+
+Two-dimensional detectors become useful when a map of intensity as a function of position is required, such as in single crystal diffraction techniques. An example of a 2D detector used for Laue diffraction, a crystal analysis technique, is a multi-wire proportional counter, Figure \ref{wirechamber}. Such a device consists of a screen, behind which is a chamber filled with an Ar gas mixture and wire mesh. X-rays ionize Ar atoms, which are then drawn to the wire mesh held at a negative voltage. The addition of 10\% CO\textsubscript{2} in the mixture limits chain reactions where one x-ray leads to several ions. Each ion-wire collision produces a small current at the location of the wire, which is then interpreted as intensity data.
+  
+\subsection{Laue diffraction}
+The model presented above in e.g. Equation \ref{Bragg'sLaw} is the Bragg model of diffraction, wherein the energies (wavelengths) of the diffracting photons are identical and only positional differences, such as angle of incidence, dictate whether diffraction will occur. However, also as mentioned above, different wavelengths can also cause interference. In Laue diffraction, polychromatic radiation is used. At the normal operating condition for a Laue tube of 10 kV, the radiation is entirely broad bremsstrahlung background without element-characteristic elements. The most important part of the spectrum is the part around 1 \AA – on par with the size of the spacing between atoms that we would like to characterize - which is optimized between 10 and 15 kV. Laue diffraction comes in two geometries: transmission and back-reflection. The relatively low intensity of x-rays here limits the sample thickness in transmission mode because, in order to reach the detector, an x-ray would have to pass all the way through the sample. In back-reflection, this is less of a concern, although highly absorbing samples will produce fainter patterns.
+
+\subsubsection{Spot intensities}
+In Laue diffraction, a stationary crystal is bombarded with many wavelengths. This is in contrast with powder or single crystal diffraction, wherein a rotating crystal or powder is bombarded with one or two wavelengths. Since d and θ are fixed, all planes that make the same angle θ with the source will be superimposed on one Laue “spot” FIGURE
+You can think of each plane as “choosing” the right λ for its diffraction condition out of the many available. The intensity of a Laue spot is the sum of all the diffracting x-rays with the same scattering angle θ that reach the detector.
+This means that nominally “forbidden” reflections may still produce spots.
+It also means that lower index numbers will have the most intense spots, because the lower the index number, the more symmetrically equivalent planes there are to reflect x-rays.
+{110} = (110) + (220) + (330) + (440) +…
+
+Counter-intuitively, absolutely perfect crystals produce weak patterns. The reason for this is that a phenomenon called primary extinction reduces the intensity of the incident beam as it travels through the crystal, so deeper planes receive fewer x-rays. Primary extinction is caused by scattering in one plane – e.g. (200) – redirecting an x-ray antiparallel to its original trajectory with a \ang{90} phase shift. When this x-ray interacts with a higher plane – e.g. (100) – it scatters and gets another \ang{90} phase. The final beam is now parallel to the initial with the exact \ang{181} phase difference needed for deconstructive interference FIGURE
 Real materials actually have a kind of mosaic structure FIGURE with lots of micro-domains oriented similarly. This allows tiny variations in the phases of diffracted x-rays which prevent completely destructive interference.
 Even in mosaic crystals, outer planes will always experience greater intensity than inner ones. If the inner planes are at the same orientation as the outer ones, they receive much less because the outer planes have already diffracted (i.e. redirected) the x-rays out of the material. Laue is semi-surface sensitive.
 Individual defects in a crystal act like lone atoms, scattering x-rays in all directions. This contributes to a broad background and reduces the intensity of spots by comparison. Completely amorphous samples have basically no ordered interference and no spots. You may be able to see some broad but weak variations in intensities if there is a preferred orientation.
-\subsubsubsection{Summary of factors influencing intensity}
+In summary:
 \begin{itemize}
     \item Index number – lower index means more intense, in general
     \item Absorption factor – less absorbing element = more intense
@@ -180,61 +250,7 @@ The discussion above also tells us that a broader spot in general results from g
 You can cut down on beam divergence by using a smaller collimator, and this is half of the reason why smaller collimators produce higher resolution patterns with smaller, better separated spots. The other half of the reason is lower incident beam intensity resulting in less background, as discussed above.
 Therefore, if you suspect some of your spot broadening or lack of circular symmetry may be due to poor crystal quality, you should swap to a smaller collimator and increase your exposure time. If the spots begin to look more like figure 8’s than ellipses, you have a second domain. Clovers would indicate three domains. Both shapes are highly unlikely to be from beam divergence. 
 \subsubsection{Spot positions}
-\subsubsubsection{The reciprocal lattice}
-The reciprocal lattice is a description of what an x-ray will interact with. It has the useful feature of sharing the symmetry of its parent lattice, and it is what we actually image in Laue diffraction (rather than the actual real-space location of your atoms). The precise definition of the reciprocal lattice is the set of all vectors that are wavevectors of plane waves in the Fourier series of a spatial function with the periodicity your real [direct] lattice.
-To better understand this concept, note that plane waves can be written as functions of wavenumber k and position x (see equation 14 for the precise form). The direct [real] lattice exists in Euclidean space (the real world), where length is measured by x, FIGURE. The reciprocal lattice exists in k-space, where length is measured by k,FIGURE. They both describe the same thing, but the reciprocal lattice is more useful for talking about diffraction because a point on the reciprocal lattice corresponds to a plane wave in real space whose phase is 2πn at every direct lattice point. Recall that 2πn is the constructive interference condition. Thus the reciprocal lattice has points everywhere incident x-rays should constructively interfere!\footnote{See also https://www.youtube.com/watch?v=DFFU39A3fPY for a visualization} The same can not be said of the direct lattice.
-Just like real crystals are described by unit vectors a b c , the reciprocal lattice is described by unit vectors a* b* c*, which can be calculated from the unit vectors of your initial real-space lattice. K is a constant relating to the volume of your initial lattice.
-
-\begin{equation}
-    \vec{a^*}=K\frac{\vec{b}\times\vec{c}}{\vec{a}\cdot(\vec{b}\times\vec{c})};\quad
-    \vec{b^*}=K\frac{\vec{c}\times\vec{a}}{\vec{b}\cdot(\vec{c}\times\vec{a})};\quad
-    \vec{c^*}=K\frac{\vec{a}\times\vec{b}}{\vec{c}\cdot(\vec{a}\times\vec{b})}
-    \label{RecipLatVecs}
-\end{equation}
-
-The reciprocal lattice is the set of all reciprocal lattice vectors x*. The following relationship holds between the real space lattice vectors x and the reciprocal lattice vector x*:
-\begin{equation}
-    \vec{x^*}=h\vec{a^*}+k\vec{b^*}+l\vec{c^*}
-    \label{RecipLatVecX}
-\end{equation}
-\begin{equation}
-    \vec{x}=p\vec{a}+q\vec{b}+r\vec{c}
-    \label{RealLatVecX}
-\end{equation}
-\begin{equation}
-    \vec{x}\cdot\vec{x^*}=2\pi n
-    \label{RecipRealLatVecXRelation}
-\end{equation}
-Points in the reciprocal lattice – the points imaged by Laue diffraction – are determined by the location and spacing of planes in the real crystal. Thus each point corresponds to a different plane. The reciprocal lattice is insensitive to individual variations in atom types and positions, but it is sensitive to variations in d-spacing or the angles between planes.
-\subsubsection{The Ewald sphere and the Laue condition}
-The positions of Laue spots are ultimately determined by the Ewald sphere FIGURE, which is a kind of extension of Bragg’s law into three dimensions, now including the idea of the reciprocal lattice. To be precise, the Ewald sphere (also more intuitively called the “sphere of reflection”) is a sphere of radius 1/λ passing through the origin of the reciprocal lattice. 
-Imagine a diffracting x-ray from a single plane of a crystal. In the reciprocal lattice, it interacts with a single reciprocal point. It will be sent in a specific direction out of the crystal determined by the diffraction conditions and the incident direction. If you rotated the crystal, the same incident x-ray would be sent to a new point, but it’s always interacting with the same reciprocal lattice and subject to the same diffraction conditions; namely, that the wavelength of the incoming and outgoing x-rays be the same (elastic scattering) even though their directions vary.
-It turns out that Bragg’s law can be rewritten in terms of the directions of the x-rays, instead of in terms of nλ, and still describe their interference. First, we define the scattering vector Δs to describe the difference between the incoming and outgoing photon momenta with vectors s.
-\begin{equation}
-    \vec{s}_{diffracted}-\vec{s}_{incident}=\Delta\vec{s}
-    \label{ScattVec}
-\end{equation}
- Since we have elastic scattering, we know frequency doesn’t change between the incident and outgoing photons. Thus we can also write equation \ref{FreqInFreqOut1} to relate fin to fout. Equation \ref{FreqInFreqOut1} holds true whenever the phase varies by 2πn because cosine is a periodic function (this same relationship is what gave Bragg’s law, equation 2). This gives equation \ref{FreqInFreqOut2}. 
-\begin{equation}
-   \cos{(\omega t-\vec{s}_{in}\cdot\vec{x}+\varphi_{in})}=\cos{(\omega t-\vec{s}_{out}\cdot\vec{x}+\varphi_{out})}
-    \label{FreqInFreqOut1}
-\end{equation}
-\begin{equation}
-    \Rightarrow\omega t-\vec{s}_{in}\cdot\vec{x}+\varphi_{in}=\omega t-\vec{s}_{out}\cdot\vec{x}+\varphi_{out}+2\pi n
-    \label{FreqInFreqOut2}
-\end{equation}
-\begin{equation}
-    \Delta\vec{s}=\vec{x^*}
-    \label{FreqInFreqOut3}
-\end{equation}
-Combining equations \ref{ScattVec} and \ref{FreqInFreqOut1}, you can get equation \ref{FreqInFreqOut3} with some rearranging … and this looks awfully similar to equation \ref{RecipRealLatVecXRelation} for the relation between reciprocal and real lattice vectors. Thus we are able to finally derive equation \ref{LaueCondition} called the Laue condition for diffraction (after Max von Laue, not the specific technique) below: 
-\begin{equation}
-    \Rightarrow\Delta\vec{s}\cdot\vec{x}=2\pi n
-    \label{LaueCondition}
-\end{equation}
-The key to the Laue condition (which was developed before Bragg’s law)  is that the lengths of both s vectors are equal to 1/λ – and λ is the wavelength of both the diffracted and incident beams. If you draw sin and sout with the same origin, their endpoints lie on a circle of radius 1/λ FIGURE. The difference between these is the third leg of an isosceles triangle between the origin and two points on the edge. Stated equivalently, any reciprocal lattice vector that connects two points on the circle meets the diffraction conditions. 
-Include the third dimension, and you have the Ewald sphere!
-What we “see” in Laue diffraction is the inside surface of a conglomerate Ewald sphere made up of all the Ewald spheres for all the wavelengths of light in the incident beam. This is what QLaue simulates, for example.\footnote{To visualize a single Ewald sphere without polychromatic radiation, you can try this Java applet: https://www.xtal.iqfr.csic.es/Cristalografia/Applet/Ewald/diffractOgram.jar}
+What we “see” in Laue diffraction is the inside surface of a conglomerate Ewald sphere made up of all the Ewald spheres for all the wavelengths of light in the incident beam. This is what QLaue simulates, for example.
 This seems counterintuitive: when we see “spots” in the diffraction patterns, we may assume that we are looking at the exact positions of atoms (see bottom row of FIGURE for a good illustration). However, this is not the case in Laue diffraction. To see the exact locations of atoms, we would use a different technique, such as electron microscopy.
 Note that since there is also deconstructive interference, we are able to resolve distinct spots even from this conglomerate Ewald sphere. 
 \subsubsection{Laue zones and spot symmetry}
@@ -287,7 +303,29 @@ It is possible to compute the specific locations of each spot (separate from the
 \subsubsection{Stereographic projections}
 The stereographic projection is a representation of the expected spot pattern from a 3D crystal on a 2D detector. If you picture a crystal inside a sphere and draw a line normal to each face out to the edge of the sphere AFIGURE, you will have a sphere with points on its surface at the intersection of each line. If you then trace those points back down onto a flat plane, you will have a 2D representation called a stereographic projection. In general, a stereographic projection is a 2D projection of a sphere through a surface point onto a plane perpendicular to its diameter through the point. As a conformal map, it also preserves the shapes of objects on the sphere in the flat projection as well as the angles between them – circles remain circles, scalene triangles remain scalene, etc. In crystallography, the stereographic projection reflects the symmetry of the originating space group and will vary depending on the axis you are “looking down”.
 A pole figure is a graphical representation of the orientation of an object in space. If you take a stereographic projection of the reciprocal lattice of your space group, then label each point with an axis, you have created a pole figure. This process is called indexing;\footnote{You can also make pole figures with other projections, such as the gnomonic projection (image) which includes multiple index reflections on the same Laue points. See Amorós et. al. for a list of the options and their benefits.} see above for information on how to do it in practice.
+\subsubsection{Information extracted from a Laue measurement}
+\begin{singlespace}
+During regular use:
+\begin{itemize}
+    \item A measure of crystallinity and disorder from number, symmetry, and shape of spots
+    \item Info on domains and twinning from spot symmetry
+    \item Precise crystal orientation from spot locations and intensities. Non-crystalline samples may show orientation preference.
+    \item The Laue class and crystal type from primarily spot symmetry 
+    \item Crystallochemical info, \textit{i.e.} a rough check if you have the correct sample, from the Laue class and spot spacing
+\end{itemize}
+\end{singlespace}
+During specialized use:
+\begin{itemize}
+    \item A rough approximation of lattice parameters if tube voltage (\textit{i.e.} minimum $\lambda$) and sample-film distance are known
+    \item A measure of beam divergence by following careful analysis of spot shapes on a very highly-crystalline sample 
+    \item Thermal fluctuation information from diffuse scattering, if present. Typically a measurement looking for this specifically would use filters to reduce all but characteristic tube radiation (and probably a non-W source) and vary the temperature.
+    \item Time-resolved crystallography using a very specialized setup (not doable by us, but at a synchrotron) as in https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6501890/ 
+\end{itemize}
+It is possible to use characteristic intensities to study the diffuse scattering of a crystal. This diffuse scattering increases with temperature because it is due to thermal motion. It also has the interesting property of remaining in the same place no matter how you rotate your crystal.
+Note that if you are using high enough voltages to excite the characteristic emissions of the tungsten anode, you will see strangely intense spots from these characteristic x-rays! These are called “Bragg” spots, while the rest are “Laue” spots. The larger the unit cell, the more likely you are to see Bragg spots [when you have sufficient tube voltage].
 \subsection{Powder x-ray diffraction}
 \section{Infrared spectroscopy}
+\section{Electrical transport}
+\subsection{Breakout box}
 \section{Thermogravimetric analysis}
 \section{Magnetization}
